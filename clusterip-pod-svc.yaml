@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: dotnetrestapi-pod
+  labels:
+    app: dotnetrestapi
+  # namespace: learning
+spec:
+  containers:
+    - name: dotnetrestapi-container
+      image:  karthik1409docker/dotnet-core-webapis:webapi
+      ports:
+        - containerPort: 6000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dotnetrestapi-svc
+spec:
+  selector: 
+    app: dotnetrestapi
+  # type: NodePort
+  ports:
+    - name: http
+      port: 3001             # cluster IP port
+      targetPort: 6000    #container port
+      
